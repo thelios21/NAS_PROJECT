@@ -1,0 +1,113 @@
+hostname {{ router.name }}
+
+! ========================
+! VRF (PE uniquement)
+! ========================
+{% if router.vrfs %}
+{% for vrf in router.vrfs %}
+ip vrf {{ vrf.name }}
+ rd {{ vrf.rd }}
+ route-target export {{ vrf.rt_export }}
+ route-target import {{ vrf.rt_import }}
+!
+{% endfor %}
+{% endif %}
+
+! ========================
+! LOOPBACK
+! ========================
+interface Loopback0
+ ip address {{ router.loopback0 }} 255.255.255.255
+!
+
+! ========================
+! INTERFACES
+! ========================
+{% for iface in router.interfaces %}
+interface {{ iface.name }}
+{% if iface.vrf is defined %}
+ ip vrf forwarding {{ iface.vrf }}
+{% endif %}
+ ip address {{ iface.ip }} {{ iface.mask }}
+ no shutdown
+!
+{% endfor %}
+
+! ========================
+! OSPF
+! ========================
+{% if router.ospf %}
+router ospf {{ router.ospf.process_id }}
+ router-id {{ router.ospf.router_id }}
+{% for net in router.ospf.networks %}
+ network {{ net.network }} {{ net.wildcard }} area 0
+{% endfor %}
+!
+{% endif %}
+
+! ========================
+! MPLS / LDP (P + PE)
+! ========================
+{% if router.mpls %}
+mpls label protocol ldp
+mpls ldp router-id Loopback0 force
+{% for iface in router.mpls.interfaces %}
+interface {{ iface }}
+ mpls ip
+!
+{% endfor %}
+{% endif %}
+
+! ========================
+! BGP (UNIQUE BLOC)
+! ========================
+{% if router.bgp and router.bgp.enabled %}
+router bgp {{ router.bgp.asn }}
+ bgp log-neighbor-changes
+
+! ---------- voisins PE-PE (MP-BGP)
+{% for n in router.bgp.vpnv4_neighbors %}
+ neighbor {{ n.ip }} remote-as {{ n.remote_as }}
+ neighbor {{ n.ip }} update-source {{ n.update_source }}
+ neighbor {{ n.ip }} send-community extended
+{% endfor %}
+
+! ---------- voisins CE (global - rarement utilisé mais safe)
+{% for n in router.bgp.neighbors if not n.vrf %}
+ neighbor {{ n.ip }} remote-as {{ n.remote_as }}
+ neighbor {{ n.ip }} description {{ n.description }}
+{% endfor %}
+
+! ---------- MP-BGP vpnv4
+{% if router.bgp.vpnv4_neighbors %}
+ address-family vpnv4
+{% for n in router.bgp.vpnv4_neighbors %}
+  neighbor {{ n.ip }} activate
+{% endfor %}
+ exit-address-family
+{% endif %}
+
+! ---------- VRF address-family (PE)
+{% if router.vrfs %}
+{% for vrf in router.vrfs %}
+ address-family ipv4 vrf {{ vrf.name }}
+{% for n in router.bgp.neighbors if n.vrf == vrf.name %}
+  neighbor {{ n.ip }} remote-as {{ n.remote_as }}
+  neighbor {{ n.ip }} activate
+{% endfor %}
+  redistribute connected
+ exit-address-family
+{% endfor %}
+{% endif %}
+
+! ---------- CE : annonce automatique
+{% if router.type == "CE" and router.bgp.networks %}
+ address-family ipv4
+{% for net in router.bgp.networks %}
+  network {{ net.network }} mask {{ net.mask }}
+{% endfor %}
+ exit-address-family
+{% endif %}
+
+!
+{% endif %}

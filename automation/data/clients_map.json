@@ -1,0 +1,14 @@
+{
+  "CE1": {
+    "client_id": "CLIENT_A"
+  },
+  "CE2": {
+    "client_id": "CLIENT_A"
+  },
+  "CE3": {
+    "client_id": "CLIENT_B"
+  },
+  "CE4" : {
+    "client_id" : "CLIENT_B"
+  }
+}

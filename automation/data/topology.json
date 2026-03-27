@@ -1,0 +1,1120 @@
+{
+  "routers": [
+    {
+      "name": "PE1",
+      "type": "PE",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.1",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.0"
+        },
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.9",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.8"
+        },
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.54",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.52",
+          "vrf": "CLIENT_A"
+        },
+        {
+          "name": "GigabitEthernet3/0",
+          "ip": "10.0.0.66",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.64",
+          "vrf": "CLIENT_B"
+        }
+      ],
+      "loopback0": "15.15.15.15",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "15.15.15.15",
+        "networks": [
+          {
+            "network": "10.0.0.0",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.8",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "15.15.15.15",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "15.15.15.15",
+        "interfaces": [
+          "FastEthernet0/0",
+          "GigabitEthernet1/0"
+        ]
+      },
+      "vrfs": [
+        {
+          "name": "CLIENT_A",
+          "rd": "65000:1",
+          "rt_import": "65000:1",
+          "rt_export": "65000:1"
+        },
+        {
+          "name": "CLIENT_B",
+          "rd": "65000:2",
+          "rt_import": "65000:2",
+          "rt_export": "65000:2"
+        }
+      ],
+      "bgp": {
+        "enabled": true,
+        "asn": 65000,
+        "neighbors": [
+          {
+            "ip": "10.0.0.53",
+            "remote_as": 65001,
+            "description": "CE1",
+            "vrf": "CLIENT_A",
+            "activate_in_vrf": true
+          },
+          {
+            "ip": "10.0.0.65",
+            "remote_as": 65004,
+            "description": "CE4",
+            "vrf": "CLIENT_B",
+            "activate_in_vrf": true
+          }
+        ],
+        "vpnv4_neighbors": [
+          {
+            "ip": "16.16.16.16",
+            "remote_as": 65000,
+            "description": "PE2",
+            "update_source": "Loopback0"
+          }
+        ],
+        "networks": []
+      }
+    },
+    {
+      "name": "P1",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.2",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.0"
+        },
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.41",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.40"
+        }
+      ],
+      "loopback0": "5.5.5.5",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "5.5.5.5",
+        "networks": [
+          {
+            "network": "10.0.0.0",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.40",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "5.5.5.5",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "5.5.5.5",
+        "interfaces": [
+          "FastEthernet0/0",
+          "GigabitEthernet1/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "P2",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.5",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.4"
+        },
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.50",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.48"
+        }
+      ],
+      "loopback0": "7.7.7.7",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "7.7.7.7",
+        "networks": [
+          {
+            "network": "10.0.0.4",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.48",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "7.7.7.7",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "7.7.7.7",
+        "interfaces": [
+          "FastEthernet0/0",
+          "GigabitEthernet1/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "PE2",
+      "type": "PE",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.6",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.4"
+        },
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.14",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.12"
+        },
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.58",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.56",
+          "vrf": "CLIENT_A"
+        },
+        {
+          "name": "GigabitEthernet3/0",
+          "ip": "10.0.0.61",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.60",
+          "vrf": "CLIENT_B"
+        }
+      ],
+      "loopback0": "16.16.16.16",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "16.16.16.16",
+        "networks": [
+          {
+            "network": "10.0.0.4",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.12",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "16.16.16.16",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "16.16.16.16",
+        "interfaces": [
+          "FastEthernet0/0",
+          "GigabitEthernet1/0"
+        ]
+      },
+      "vrfs": [
+        {
+          "name": "CLIENT_A",
+          "rd": "65000:1",
+          "rt_import": "65000:1",
+          "rt_export": "65000:1"
+        },
+        {
+          "name": "CLIENT_B",
+          "rd": "65000:2",
+          "rt_import": "65000:2",
+          "rt_export": "65000:2"
+        }
+      ],
+      "bgp": {
+        "enabled": true,
+        "asn": 65000,
+        "neighbors": [
+          {
+            "ip": "10.0.0.57",
+            "remote_as": 65002,
+            "description": "CE2",
+            "vrf": "CLIENT_A",
+            "activate_in_vrf": true
+          },
+          {
+            "ip": "10.0.0.62",
+            "remote_as": 65003,
+            "description": "CE3",
+            "vrf": "CLIENT_B",
+            "activate_in_vrf": true
+          }
+        ],
+        "vpnv4_neighbors": [
+          {
+            "ip": "15.15.15.15",
+            "remote_as": 65000,
+            "description": "PE1",
+            "update_source": "Loopback0"
+          }
+        ],
+        "networks": []
+      }
+    },
+    {
+      "name": "P3",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.10",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.8"
+        },
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.30",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.28"
+        },
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.38",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.36"
+        }
+      ],
+      "loopback0": "8.8.8.8",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "8.8.8.8",
+        "networks": [
+          {
+            "network": "10.0.0.8",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.28",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.36",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "8.8.8.8",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "8.8.8.8",
+        "interfaces": [
+          "GigabitEthernet1/0",
+          "FastEthernet0/0",
+          "GigabitEthernet2/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "P6",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.25",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.24"
+        },
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.33",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.32"
+        }
+      ],
+      "loopback0": "11.11.11.11",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "11.11.11.11",
+        "networks": [
+          {
+            "network": "10.0.0.24",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.32",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "11.11.11.11",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "11.11.11.11",
+        "interfaces": [
+          "FastEthernet0/0",
+          "GigabitEthernet1/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "P7",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.22",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.20"
+        },
+        {
+          "name": "GigabitEthernet3/0",
+          "ip": "10.0.0.34",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.32"
+        }
+      ],
+      "loopback0": "12.12.12.12",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "12.12.12.12",
+        "networks": [
+          {
+            "network": "10.0.0.20",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.32",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "12.12.12.12",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "12.12.12.12",
+        "interfaces": [
+          "FastEthernet0/0",
+          "GigabitEthernet3/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "P8",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.46",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.44"
+        },
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.49",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.48"
+        }
+      ],
+      "loopback0": "13.13.13.13",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "13.13.13.13",
+        "networks": [
+          {
+            "network": "10.0.0.44",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.48",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "13.13.13.13",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "13.13.13.13",
+        "interfaces": [
+          "GigabitEthernet1/0",
+          "FastEthernet0/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "P10",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.17",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.16"
+        },
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.37",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.36"
+        }
+      ],
+      "loopback0": "6.6.6.6",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "6.6.6.6",
+        "networks": [
+          {
+            "network": "10.0.0.16",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.36",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "6.6.6.6",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "6.6.6.6",
+        "interfaces": [
+          "GigabitEthernet1/0",
+          "FastEthernet0/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "P5",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.26",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.24"
+        },
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.29",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.28"
+        }
+      ],
+      "loopback0": "10.10.10.10",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "10.10.10.10",
+        "networks": [
+          {
+            "network": "10.0.0.24",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.28",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.10.10.10",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "10.10.10.10",
+        "interfaces": [
+          "GigabitEthernet1/0",
+          "FastEthernet0/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "P4",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.42",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.40"
+        },
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.45",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.44"
+        }
+      ],
+      "loopback0": "9.9.9.9",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "9.9.9.9",
+        "networks": [
+          {
+            "network": "10.0.0.40",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.44",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "9.9.9.9",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "9.9.9.9",
+        "interfaces": [
+          "GigabitEthernet1/0",
+          "FastEthernet0/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "P9",
+      "type": "P",
+      "asn": 65000,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.13",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.12"
+        },
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.18",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.16"
+        },
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.21",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.20"
+        }
+      ],
+      "loopback0": "14.14.14.14",
+      "ospf": {
+        "process_id": 1,
+        "router_id": "14.14.14.14",
+        "networks": [
+          {
+            "network": "10.0.0.12",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.16",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "10.0.0.20",
+            "wildcard": "0.0.0.3"
+          },
+          {
+            "network": "14.14.14.14",
+            "wildcard": "0.0.0.0"
+          }
+        ]
+      },
+      "mpls": {
+        "ldp": true,
+        "router_id": "14.14.14.14",
+        "interfaces": [
+          "FastEthernet0/0",
+          "GigabitEthernet1/0",
+          "GigabitEthernet2/0"
+        ]
+      },
+      "bgp": {
+        "enabled": false,
+        "asn": 65000,
+        "neighbors": [],
+        "vpnv4_neighbors": [],
+        "networks": []
+      }
+    },
+    {
+      "name": "CE1",
+      "type": "CE",
+      "asn": 65001,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.53",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.52"
+        }
+      ],
+      "loopback0": "192.168.1.1",
+      "loopback_network": "192.168.1.0",
+      "loopback_mask": "255.255.255.0",
+      "client_id": "CLIENT_A",
+      "bgp": {
+        "enabled": true,
+        "asn": 65001,
+        "neighbors": [
+          {
+            "ip": "10.0.0.54",
+            "remote_as": 65000,
+            "description": "PE1",
+            "vrf": null,
+            "activate_in_vrf": false
+          }
+        ],
+        "vpnv4_neighbors": [],
+        "networks": [
+          {
+            "network": "192.168.1.1",
+            "mask": "255.255.255.255"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CE2",
+      "type": "CE",
+      "asn": 65002,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.57",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.56"
+        }
+      ],
+      "loopback0": "192.168.2.1",
+      "loopback_network": "192.168.2.0",
+      "loopback_mask": "255.255.255.0",
+      "client_id": "CLIENT_A",
+      "bgp": {
+        "enabled": true,
+        "asn": 65002,
+        "neighbors": [
+          {
+            "ip": "10.0.0.58",
+            "remote_as": 65000,
+            "description": "PE2",
+            "vrf": null,
+            "activate_in_vrf": false
+          }
+        ],
+        "vpnv4_neighbors": [],
+        "networks": [
+          {
+            "network": "192.168.2.1",
+            "mask": "255.255.255.255"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CE3",
+      "type": "CE",
+      "asn": 65003,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.62",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.60"
+        }
+      ],
+      "loopback0": "192.168.3.1",
+      "loopback_network": "192.168.3.0",
+      "loopback_mask": "255.255.255.0",
+      "client_id": "CLIENT_B",
+      "bgp": {
+        "enabled": true,
+        "asn": 65003,
+        "neighbors": [
+          {
+            "ip": "10.0.0.61",
+            "remote_as": 65000,
+            "description": "PE2",
+            "vrf": null,
+            "activate_in_vrf": false
+          }
+        ],
+        "vpnv4_neighbors": [],
+        "networks": [
+          {
+            "network": "192.168.3.1",
+            "mask": "255.255.255.255"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CE4",
+      "type": "CE",
+      "asn": 65004,
+      "interfaces": [
+        {
+          "name": "FastEthernet0/0",
+          "ip": "10.0.0.65",
+          "mask": "255.255.255.252",
+          "network": "10.0.0.64"
+        }
+      ],
+      "loopback0": "192.168.4.1",
+      "loopback_network": "192.168.4.0",
+      "loopback_mask": "255.255.255.0",
+      "client_id": "CLIENT_B",
+      "bgp": {
+        "enabled": true,
+        "asn": 65004,
+        "neighbors": [
+          {
+            "ip": "10.0.0.66",
+            "remote_as": 65000,
+            "description": "PE1",
+            "vrf": null,
+            "activate_in_vrf": false
+          }
+        ],
+        "vpnv4_neighbors": [],
+        "networks": [
+          {
+            "network": "192.168.4.1",
+            "mask": "255.255.255.255"
+          }
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "a": "PE1",
+      "a_iface": "FastEthernet0/0",
+      "b": "P1",
+      "b_iface": "FastEthernet0/0",
+      "network": "10.0.0.0",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.1",
+      "b_ip": "10.0.0.2",
+      "link_type": "core"
+    },
+    {
+      "a": "P2",
+      "a_iface": "FastEthernet0/0",
+      "b": "PE2",
+      "b_iface": "FastEthernet0/0",
+      "network": "10.0.0.4",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.5",
+      "b_ip": "10.0.0.6",
+      "link_type": "core"
+    },
+    {
+      "a": "PE1",
+      "a_iface": "GigabitEthernet1/0",
+      "b": "P3",
+      "b_iface": "GigabitEthernet1/0",
+      "network": "10.0.0.8",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.9",
+      "b_ip": "10.0.0.10",
+      "link_type": "core"
+    },
+    {
+      "a": "P9",
+      "a_iface": "FastEthernet0/0",
+      "b": "PE2",
+      "b_iface": "GigabitEthernet1/0",
+      "network": "10.0.0.12",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.13",
+      "b_ip": "10.0.0.14",
+      "link_type": "core"
+    },
+    {
+      "a": "P10",
+      "a_iface": "GigabitEthernet1/0",
+      "b": "P9",
+      "b_iface": "GigabitEthernet1/0",
+      "network": "10.0.0.16",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.17",
+      "b_ip": "10.0.0.18",
+      "link_type": "core"
+    },
+    {
+      "a": "P9",
+      "a_iface": "GigabitEthernet2/0",
+      "b": "P7",
+      "b_iface": "FastEthernet0/0",
+      "network": "10.0.0.20",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.21",
+      "b_ip": "10.0.0.22",
+      "link_type": "core"
+    },
+    {
+      "a": "P6",
+      "a_iface": "FastEthernet0/0",
+      "b": "P5",
+      "b_iface": "GigabitEthernet1/0",
+      "network": "10.0.0.24",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.25",
+      "b_ip": "10.0.0.26",
+      "link_type": "core"
+    },
+    {
+      "a": "P5",
+      "a_iface": "FastEthernet0/0",
+      "b": "P3",
+      "b_iface": "FastEthernet0/0",
+      "network": "10.0.0.28",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.29",
+      "b_ip": "10.0.0.30",
+      "link_type": "core"
+    },
+    {
+      "a": "P6",
+      "a_iface": "GigabitEthernet1/0",
+      "b": "P7",
+      "b_iface": "GigabitEthernet3/0",
+      "network": "10.0.0.32",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.33",
+      "b_ip": "10.0.0.34",
+      "link_type": "core"
+    },
+    {
+      "a": "P10",
+      "a_iface": "FastEthernet0/0",
+      "b": "P3",
+      "b_iface": "GigabitEthernet2/0",
+      "network": "10.0.0.36",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.37",
+      "b_ip": "10.0.0.38",
+      "link_type": "core"
+    },
+    {
+      "a": "P1",
+      "a_iface": "GigabitEthernet1/0",
+      "b": "P4",
+      "b_iface": "GigabitEthernet1/0",
+      "network": "10.0.0.40",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.41",
+      "b_ip": "10.0.0.42",
+      "link_type": "core"
+    },
+    {
+      "a": "P4",
+      "a_iface": "FastEthernet0/0",
+      "b": "P8",
+      "b_iface": "GigabitEthernet1/0",
+      "network": "10.0.0.44",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.45",
+      "b_ip": "10.0.0.46",
+      "link_type": "core"
+    },
+    {
+      "a": "P8",
+      "a_iface": "FastEthernet0/0",
+      "b": "P2",
+      "b_iface": "GigabitEthernet1/0",
+      "network": "10.0.0.48",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.49",
+      "b_ip": "10.0.0.50",
+      "link_type": "core"
+    },
+    {
+      "a": "CE1",
+      "a_iface": "FastEthernet0/0",
+      "b": "PE1",
+      "b_iface": "GigabitEthernet2/0",
+      "network": "10.0.0.52",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.53",
+      "b_ip": "10.0.0.54",
+      "link_type": "access",
+      "client_id": "CLIENT_A"
+    },
+    {
+      "a": "CE2",
+      "a_iface": "FastEthernet0/0",
+      "b": "PE2",
+      "b_iface": "GigabitEthernet2/0",
+      "network": "10.0.0.56",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.57",
+      "b_ip": "10.0.0.58",
+      "link_type": "access",
+      "client_id": "CLIENT_A"
+    },
+    {
+      "a": "PE2",
+      "a_iface": "GigabitEthernet3/0",
+      "b": "CE3",
+      "b_iface": "FastEthernet0/0",
+      "network": "10.0.0.60",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.61",
+      "b_ip": "10.0.0.62",
+      "link_type": "access",
+      "client_id": "CLIENT_B"
+    },
+    {
+      "a": "CE4",
+      "a_iface": "FastEthernet0/0",
+      "b": "PE1",
+      "b_iface": "GigabitEthernet3/0",
+      "network": "10.0.0.64",
+      "mask": "255.255.255.252",
+      "wildcard": "0.0.0.3",
+      "a_ip": "10.0.0.65",
+      "b_ip": "10.0.0.66",
+      "link_type": "access",
+      "client_id": "CLIENT_B"
+    }
+  ]
+}
