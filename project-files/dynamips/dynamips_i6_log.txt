@@ -1,0 +1,31 @@
+Mar 27 14:17:52.976 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Mar 27 14:17:52.976 HYPERVISOR: Started on IP = localhost, TCP port = 52505.
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: hypervisor version 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\bonni\GNS3\projects\NAS_TP1\project-files\dynamips 
+Mar 27 14:17:53.473 GENERAL: working_dir=C:\Users\bonni\GNS3\projects\NAS_TP1\project-files\dynamips
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\bonni\GNS3\projects\NAS_TP1\project-files\dynamips\9faa09e8-58d9-45d7-8e59-99620dbade1e 
+Mar 27 14:17:53.473 GENERAL: working_dir=C:\Users\bonni\GNS3\projects\NAS_TP1\project-files\dynamips\9faa09e8-58d9-45d7-8e59-99620dbade1e
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm create P6 6 c7200 
+Mar 27 14:17:53.473 VM: VM P6 created.
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm set_con_tcp_port P6 5005 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: c7200 get_mac_addr P6 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm get_status P6 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm slot_add_binding P6 0 0 C7200-IO-FE 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm set_disk0 P6 0 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm set_exec_area P6 64 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm set_ios P6 C:/Users/bonni/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: c7200 set_mac_addr P6 ca06.51cc.0000 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm set_nvram P6 512 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm set_ram P6 512 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm get_status P6 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm slot_add_binding P6 1 0 PA-GE 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm get_status P6 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm slot_add_binding P6 2 0 PA-GE 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm get_status P6 
+Mar 27 14:17:53.473 HYPERVISOR: exec_cmd: vm slot_add_binding P6 3 0 PA-GE 
+Mar 27 14:18:01.823 HYPERVISOR: exec_cmd: nio create_udp udp-ccc53dab-77ca-4ff7-82e1-9f1198f142b8 10038 127.0.0.1 10039 
+Mar 27 14:18:02.111 HYPERVISOR: exec_cmd: vm slot_add_nio_binding P6 0 0 udp-ccc53dab-77ca-4ff7-82e1-9f1198f142b8 
+Mar 27 14:18:02.111 HYPERVISOR: exec_cmd: vm get_status P6 
+Mar 27 14:18:02.510 HYPERVISOR: exec_cmd: nio create_udp udp-6c3bed19-69f0-45d5-b797-68f510fb59f0 10050 127.0.0.1 10051 
+Mar 27 14:18:02.516 HYPERVISOR: exec_cmd: vm slot_add_nio_binding P6 1 0 udp-6c3bed19-69f0-45d5-b797-68f510fb59f0 
+Mar 27 14:18:02.516 HYPERVISOR: exec_cmd: vm get_status P6 
