@@ -70,7 +70,8 @@ NAS_PROJECT-main/
 - Jinja2 (pour les templates)
 
 L'utilisateur doit placer le dossier */automation* dans le dossier projet GNS3 au même niveau que le fichier .gns3. 
-Avant exécution : 
+
+### Avant exécution : 
 - éteindre les routeurs
 - renseigner le nom du fichier .gns3 directement dans main.py : GNS3_FILE = os.path.join(PROJECT_DIR, "NOM_DU_FICHIER.gns3")
 - définir les relations clients souhaitées dans clients_maps.json (exemple présent dans le fichier)
@@ -82,7 +83,7 @@ Avant exécution :
 cd automation
 python main.py
 ```
-Après exécution :
+### Après exécution :
 - allumer les routeurs
 - attendre la convergence (possibilité de vérifier dans les consoles des routeurs)
 
