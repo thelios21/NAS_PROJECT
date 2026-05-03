@@ -1,6 +1,6 @@
 # Architecture du dossier `automation/`
 
-## 📐 Vue d'ensemble de l'architecture
+## Vue d'ensemble de l'architecture
 
 Le dossier `automation/` implémente un **pipeline séquentiel d'automatisation réseau** qui transforme une topologie GNS3 brute en configurations MPLS/VPN complètes et prêtes à l'emploi.
 
@@ -30,7 +30,7 @@ Input: GNS3 Topology (JSON)
 Output: Routers configurés dans GNS3
 ```
 
-## 🗂️ Structure détaillée des dossiers
+## Structure détaillée des dossiers
 
 ### 1. **`topology/` - Extraction de topologie**
 
@@ -424,7 +424,7 @@ Fournit des utilitaires utilisés par tous les modules:
 
 ---
 
-## 🔄 Flux de données complet
+## Flux de données complet
 
 ```
 1. NAS_TP1.gns3
@@ -454,7 +454,7 @@ Fournit des utilitaires utilisés par tous les modules:
 
 ---
 
-## 📊 Tableau de classification des routeurs
+## Tableau de classification des routeurs
 
 | Router | Type | ASN | Loopback | OSPF | MPLS | VRF | BGP eBGP | BGP MP-BGP |
 |--------|------|-----|----------|------|------|-----|----------|-----------|
@@ -464,7 +464,7 @@ Fournit des utilitaires utilisés par tous les modules:
 
 ---
 
-## 🎯 Points clés de l'architecture
+## Points clés de l'architecture
 
 ### Séparation des préoccupations
 - Chaque module a **une responsabilité unique**
@@ -485,7 +485,7 @@ Fournit des utilitaires utilisés par tous les modules:
 
 ---
 
-## 📝 Exemples d'utilisation
+## Exemples d'utilisation
 
 ### Ajouter un nouveau protocole
 
@@ -505,7 +505,7 @@ Fournit des utilitaires utilisés par tous les modules:
 
 ---
 
-## 🚀 Performance et limitations
+## Performance et limitations
 
 | Aspect | Caractéristique |
 |--------|-----------------|
@@ -517,7 +517,7 @@ Fournit des utilitaires utilisés par tous les modules:
 
 ---
 
-## 📚 Références et ressources
+## Références et ressources
 
 - GNS3 API: Format JSON des projets .gns3
 - Jinja2 Templates: [jinja.palletsprojects.com](https://jinja.palletsprojects.com/)
