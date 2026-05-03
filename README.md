@@ -83,11 +83,12 @@ L'utilisateur doit placer le dossier */automation* dans le dossier projet GNS3 a
 cd automation
 python main.py
 ```
+
+Le script exécutera automatiquement les 10 étapes de configuration et injectera les configurations dans GNS3.
+
 ### Après exécution :
 - allumer les routeurs
 - attendre la convergence (possibilité de vérifier dans les consoles des routeurs)
-
-Le script exécutera automatiquement les 10 étapes de configuration et injectera les configurations dans GNS3.
 
 ##Conception réseau
 
