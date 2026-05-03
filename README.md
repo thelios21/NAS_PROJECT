@@ -1,17 +1,17 @@
 # NAS_TP1 - Network Automation System
 
-## 📋 Vue d'ensemble
+## Vue d'ensemble
 
 **NAS_TP1** est un système d'automatisation de réseau qui génère et configure automatiquement des réseaux MPLS/VPN complexes dans l'émulateur GNS3. Le projet extrait la topologie réseau d'un projet GNS3, applique une stratégie de conception complète (adressage IP, protocoles de routage, VRF/BGP multi-client), génère les configurations des routeurs et les injecte automatiquement dans le simulateur.
 
-## 🎯 Objectifs
+## Objectifs
 
 - **Automatiser** la configuration de réseaux MPLS/VPN multi-clients
 - **Générer** les configurations Cisco IOS à partir d'une topologie GNS3
 - **Supporter** des scénarios de VPN client avec isolation via VRF et route targets
 - **Éliminer** les configurations manuelles répétitives
 
-## 🏗️ Architecture globale
+## Architecture globale
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -42,7 +42,7 @@
 └─────────────────────────────────────────────────────────┘
 ```
 
-## 📁 Structure du projet
+## Structure du projet
 
 ```
 NAS_PROJECT-main/
@@ -62,7 +62,7 @@ NAS_PROJECT-main/
     └── dynamips/                    # Disques et logs des routeurs
 ```
 
-## 🚀 Utilisation
+## Utilisation
 
 ### Prérequis
 - GNS3 avec Dynamips
@@ -78,7 +78,7 @@ python main.py
 
 Le script exécutera automatiquement les 10 étapes de configuration et injectera les configurations dans GNS3.
 
-## 🌐 Conception réseau
+##Conception réseau
 
 ### Architecture MPLS/VPN
 
@@ -112,7 +112,7 @@ Le système configure une architecture **MPLS/VPN multi-client** typique :
 | **PE** | Provider Edge - connexion clients |
 | **CE** | Customer Edge - accès client |
 
-## 📊 Flux de données
+## Flux de données
 
 1. **Topology Extraction** → Analyse GNS3, détecte topologie et types de routeurs
 2. **IP Planning** → Assigne adresses loopback et subnets /30
@@ -121,7 +121,7 @@ Le système configure une architecture **MPLS/VPN multi-client** typique :
 5. **Rendering** → Utilise Jinja2 pour générer configs Cisco IOS
 6. **Injection** → Copie configs dans répertoires Dynamips de GNS3
 
-## 📄 Fichiers de données
+## Fichiers de données
 
 ### Inputs
 - **topology.json** : Topologie extraite de GNS3 (auto-généré)
@@ -131,7 +131,7 @@ Le système configure une architecture **MPLS/VPN multi-client** typique :
 - **configs/*.cfg** : Fichiers de configuration Cisco IOS générés
 - **project-files/dynamips/[uuid]/** : Configs injectées dans GNS3
 
-## 🔧 Détails techniques
+## Détails techniques
 
 ### Protocoles supportés
 
@@ -152,14 +152,6 @@ Le template [router_ios.j2](automation/templates/router_ios.j2) génère les con
 - VRF et route targets
 - BGP
 
-## 📚 Documentation additionnelle
+## Documentation additionnelle
 
 Pour plus de détails sur l'architecture du dossier automation, voir [ARCHITECTURE.md](ARCHITECTURE.md).
-
-## 📝 Licence
-
-Projet académique - TP Réseau Avancé
-
-## 👤 Auteur
-
-Créé pour l'apprentissage des réseaux MPLS/VPN et l'automatisation avec GNS3.
