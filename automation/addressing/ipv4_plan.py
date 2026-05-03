@@ -45,13 +45,11 @@ def apply_addressing(topology_file):
                     if iface["name"] == link["b_iface"] else iface
                     for iface in r["interfaces"]
                 ]
-    # LOOPBACK CE (automatique)
+    # LOOPBACK CE (automatique) - /32 comme tous les autres
     ce_index = 1
     for r in topo["routers"]:
         if r["type"] == "CE":
             r["loopback0"] = f"192.168.{ce_index}.1"
-            r["loopback_network"] = f"192.168.{ce_index}.0"
-            r["loopback_mask"] = "255.255.255.0"
             ce_index += 1
     save_json(topology_file, topo)
     print("[OK] Addressing applied")
