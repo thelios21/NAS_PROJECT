@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-**NAS_TP** est un système d'automatisation de réseau qui génère et configure automatiquement des réseaux MPLS/VPN complexes dans l'émulateur GNS3. Le projet extrait la topologie réseau d'un projet GNS3, applique une stratégie de conception complète (adressage IP, protocoles de routage, VRF/BGP multi-client), génère les configurations des routeurs et les injecte automatiquement dans le simulateur.
+Au cours de ce projet, nous avons développé un système d'automatisation de réseau qui génère et configure automatiquement des réseaux MPLS/VPN complexes dans l'émulateur GNS3. Le projet extrait la topologie réseau d'un projet GNS3, applique une stratégie de conception complète (adressage IP, protocoles de routage, VRF/BGP multi-client), génère les configurations des routeurs et les injecte automatiquement dans le simulateur. Nous avons importé l'entiéreté de notre projet GNS3 **NAS_TP1.gns3** afin de montrer l'architecture nécessaire à l'utilisation des différents fichiers.
 
 ## Objectifs
 
@@ -69,12 +69,22 @@ NAS_PROJECT-main/
 - Python 3.x
 - Jinja2 (pour les templates)
 
+L'utilisateur doit placer le dossier */automation* dans le dossier projet GNS3 au même niveau que le fichier .gns3. 
+Avant exécution : 
+- éteindre les routeurs
+- renseigner le nom du fichier .gns3 directement dans main.py : GNS3_FILE = os.path.join(PROJECT_DIR, "NOM_DU_FICHIER.gns3")
+- définir les relations clients souhaitées dans clients_maps.json (exemple présent dans le fichier)
+- prendre soin de vérifier le format des noms des routeurs qui doit être strictement de la forme CEX, PEX ou PX (X étant un entier)
+
 ### Exécution
 
 ```bash
 cd automation
 python main.py
 ```
+Après exécution :
+- allumer les routeurs
+- attendre la convergence (possibilité de vérifier dans les consoles des routeurs)
 
 Le script exécutera automatiquement les 10 étapes de configuration et injectera les configurations dans GNS3.
 
