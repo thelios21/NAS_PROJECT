@@ -1,8 +1,8 @@
-# NAS_TP1 - Network Automation System
+# NAS_TP - Network Automation System
 
 ## Vue d'ensemble
 
-**NAS_TP1** est un système d'automatisation de réseau qui génère et configure automatiquement des réseaux MPLS/VPN complexes dans l'émulateur GNS3. Le projet extrait la topologie réseau d'un projet GNS3, applique une stratégie de conception complète (adressage IP, protocoles de routage, VRF/BGP multi-client), génère les configurations des routeurs et les injecte automatiquement dans le simulateur.
+**NAS_TP** est un système d'automatisation de réseau qui génère et configure automatiquement des réseaux MPLS/VPN complexes dans l'émulateur GNS3. Le projet extrait la topologie réseau d'un projet GNS3, applique une stratégie de conception complète (adressage IP, protocoles de routage, VRF/BGP multi-client), génère les configurations des routeurs et les injecte automatiquement dans le simulateur.
 
 ## Objectifs
 
