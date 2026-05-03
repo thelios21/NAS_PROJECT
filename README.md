@@ -88,7 +88,7 @@ Le script exécutera automatiquement les 10 étapes de configuration et injecter
 
 ### Après exécution :
 - allumer les routeurs
-- attendre la convergence (possibilité de vérifier dans les consoles des routeurs)
+- attendre la convergence qui peut prendre plusieurs minutes (possibilité de vérifier dans les consoles des routeurs)
 
 ##Conception réseau
 
